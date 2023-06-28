@@ -1,0 +1,31 @@
+class Solution {
+public:
+    //max heap
+    int lastStoneWeight(vector<int>& stones) {
+        priority_queue<int> pq;
+        for(auto i: stones){
+            pq.push(i);
+        }
+        int stone_x{};
+        int stone_y{};
+        int ans{};
+
+        while(pq.size()>1){
+            stone_y = pq.top();
+            pq.pop();
+            stone_x = pq.top();
+            pq.pop();
+            if(stone_x<=stone_y){
+                if(stone_x!=stone_y){
+                    pq.push(stone_y-stone_x);
+                }
+            }
+        }
+        if(pq.empty()){
+            ans=0;
+        }else{
+            ans = pq.top();
+        }
+        return ans;
+    }
+};
